@@ -1,0 +1,32 @@
+//Create a new bridged network for the container.
+docker network create -d bridge voltLocalCluster
+
+//To run the container. The exposed ports can be found in the documentation in the DockerHub
+docker run -d -P -e HOST_COUNT=1 -e HOSTS=node1 --name=node1 --network=voltLocalCluster voltdb/voltdb-community:latest
+
+//See the exposed ports
+docker port node1
+
+//Connect with sqlcmd
+sqlcmd --port=...
+
+//Table creation, SQL syntax
+create table ...
+
+//Basic container operations
+docker container stop node1
+docker container ls -a
+docker container rm node1
+docker container list
+docker start node1
+
+//More SQL syntax ...
+list tables ...
+
+
+.
+.  These commands can be used to run the container. To be interpreted as a helpful reminder rather than strict guide.
+.
+
+//ERROR
+ --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED -Duser.language=en
